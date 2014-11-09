@@ -21,30 +21,33 @@ public class SwitchMethods extends Model
 	 * @throws SQLException
 	 */
 
-	public String createNewCalender (String userName, String calenderName, int privatePublic) throws SQLException
+	public String createNewCalendar (String userName, String calendarName, int privatePublic) throws SQLException
 	{
 		String stringToBeReturned ="";
 		testConnection();
-		if(authenticateNewCalender(calenderName) == false)
+		System.out.println("så langt så godt");
+		if(authenticateNewCalendar(calendarName) == false)
 		{
-			addNewCalender(calenderName, userName, privatePublic);
-			stringToBeReturned = "The new calender has been created!";
+			System.out.println("kalenderen bliver oprettet");
+			addNewCalender(calendarName, userName, privatePublic);
+			System.out.println("Færdig med at oprette");
+			stringToBeReturned = "The new calendar has been created!";
 		}
 		else
 		{
-			stringToBeReturned = "The new calender has not been created!";
+			stringToBeReturned = "The new calendar has not been created!";
 		}
 		
 		
 		return stringToBeReturned;
 	}
 	
-	public boolean authenticateNewCalender(String newCalenderName) throws SQLException
+	public boolean authenticateNewCalendar(String newCalendarName) throws SQLException
 	{
 		getConn();
 		boolean authenticate = false;
 		
-		resultSet= qb.selectFrom("calendar").where("name", "=", newCalenderName).ExecuteQuery();
+		resultSet= qb.selectFrom("calendar").where("name", "=", newCalendarName).ExecuteQuery();
 				
 				//("select * from test.calender where Name = '"+newCalenderName+"';");
 		while(resultSet.next())
@@ -54,10 +57,10 @@ public class SwitchMethods extends Model
 		return authenticate;
 	}
 	
-	public void addNewCalender (String newCalenderName, String userName, int publicOrPrivate) throws SQLException
+	public void addNewCalender (String newCalendarName, String userName, int publicOrPrivate) throws SQLException
 	{
 		String [] keys = {"Name","active","CreatedBy","PrivatePublic"};
-		String [] values = {newCalenderName,"1",userName, Integer.toString(publicOrPrivate)};
+		String [] values = {newCalendarName,"1",userName, Integer.toString(publicOrPrivate)};
 		qb.update("calendar", keys, values).all().Execute();
 		
 //		doUpdate("insert into test.calender (Name, Active, CreatedBy, PrivatePublic) VALUES ('"+newCalenderName+"', '1', '"+userName+"', '"+publicOrPrivate+"');");

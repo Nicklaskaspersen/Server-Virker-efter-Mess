@@ -5,7 +5,7 @@ import model.calendar.Event;
 import model.note.Note;
 import JsonClasses.AuthUser;
 import JsonClasses.CalendarInfo;
-import JsonClasses.CreateCalender;
+import JsonClasses.CreateCalendar;
 import JsonClasses.DeleteCalender;
 
 import com.google.gson.*;
@@ -55,19 +55,19 @@ public class GiantSwitch {
 		/*************
 		 ** CALENDAR **
 		 *************/
-		case "createCalender":
-			CreateCalender CC = (CreateCalender)gson.fromJson(jsonString, CreateCalender.class);
-			System.out.println(CC.getCalenderName()+ "Den har lagt det nye ind i klassen");
-			answer = SW.createNewCalender(CC.getUserName(), CC.getCalenderName(), CC.getPublicOrPrivate());
+		case "createCalendar":
+			CreateCalendar CC = (CreateCalendar)gson.fromJson(jsonString, CreateCalendar.class);
+			System.out.println(CC.getCalendarName()+ ": har lagt det nye ind i klassen");
+			answer = SW.createNewCalendar(CC.getUserName(), CC.getCalendarName(), CC.getPublicOrPrivate());
 			break;
 		
-		case "deleteCalender":
+		case "deleteCalendar":
 			DeleteCalender DC = (DeleteCalender)gson.fromJson(jsonString, DeleteCalender.class);
 			System.out.println(DC.getCalenderName()+ "Den har lagt det nye ind i klassen");
 			answer = SW.deleteCalender(DC.getUserName(), DC.getCalenderName());
 			break;
 		
-		case "saveImportedCalender":
+		case "saveImportedCalendar":
 			
 			
 			break;
@@ -143,12 +143,12 @@ public class GiantSwitch {
 			return "getNote";
 		} else if (ID.contains("deleteNote")){
 			return "deleteNote";
-		}else if  (ID.contains("deleteCalender")){
-			return "deleteCalender";
+		}else if  (ID.contains("deleteCalendar")){
+			return "deleteCalendar";
 		} else if (ID.contains("getClientForecast")) {
 			return "getClientForecast";
-		} else if (ID.contains("saveImportedCalender")) {
-			return "saveImportedCalender";
+		} else if (ID.contains("saveImportedCalendar")) {
+			return "saveImportedCalendar";
 		}else if (ID.contains("importCourse")) {
 			return "importCourse";
 		} else if (ID.contains("exportCourse")) {
@@ -159,14 +159,14 @@ public class GiantSwitch {
 			return "logIn";
 		} else if (ID.contains("logOut")) {
 			return "logOut";
-		} else if (ID.contains("getCalender")) {
-			return "getCalender";
+		} else if (ID.contains("getCalendar")) {
+			return "getCalendar";
 		} else if (ID.contains("createEvent")) {
 			return "createEvent";
 		} else if (ID.contains("deleteEvent")) {
 			return "deleteEvent"; 
-		} else if (ID.contains("createCalender")) {
-			return "createCalender";
+		} else if (ID.contains("createCalendar")) {
+			return "createCalendar";
 		}
 
 		else

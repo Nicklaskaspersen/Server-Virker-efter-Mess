@@ -2,16 +2,22 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.Scanner;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import JsonClasses.*;
 
 public class TCPClient {
 	public static void main(String[] args) throws Exception {
 		String modifiedSentence;
 		Gson gson = new GsonBuilder().create();
-		CreateCalender CC = new CreateCalender();
-		CC.setCalenderName("Din mors kalender2");
+		CreateCalendar CC = new CreateCalendar();
+		Scanner userInput = new Scanner(System.in);
+		System.out.println("indtast hvad din kalender skal hedde");
+		String kalenderNavn = userInput.nextLine();
+		CC.setCalendarName(kalenderNavn);
 		CC.setPublicOrPrivate(1);
 		CC.setUserName("John");
 		String gsonString = gson.toJson(CC);
@@ -27,6 +33,7 @@ public class TCPClient {
 		for (int i = 0; i < encrypted.length; i++)
 			encrypted[i] = (byte) (encrypted[i] ^ key);
 
+		System.out.println(encrypted);
 		outToServer.write(encrypted);
 		outToServer.flush();
 		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(

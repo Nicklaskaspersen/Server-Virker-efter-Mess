@@ -3,6 +3,11 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.net.Socket;
 
+import JsonClasses.CreateCalendar;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 
 public class ClientWorker implements  Runnable{
 	private Socket connectionSocketConected;
@@ -10,6 +15,7 @@ public class ClientWorker implements  Runnable{
 	private GiantSwitch GS = new GiantSwitch();
 	private encryption cryp = new encryption();
 	private String incomingJson;
+	Gson gson = new GsonBuilder().create();
 	
 	ClientWorker(Socket connectionSocket){
 		this.connectionSocketConected = connectionSocket;
@@ -19,17 +25,21 @@ public class ClientWorker implements  Runnable{
 		try{
 			System.out.println("forbindelse Oprettet!");
 			//BufferedReader inFromClient = new BufferedReader(new InputStreamReader(connectionSocket.getInputStream()));
-			byte[] b = new byte[500000];
-			int count = connectionSocketConected.getInputStream().read(b);
-			ByteArrayInputStream bais = new ByteArrayInputStream(b);
-			DataInputStream inFromClient = new DataInputStream(connectionSocketConected.getInputStream());		
+			DataInputStream inFromClient = new DataInputStream(connectionSocketConected.getInputStream());				
 			//Creates an object of the data which is to be send back to the client, via the connectionSocket
 			DataOutputStream outToClient = new DataOutputStream(connectionSocketConected.getOutputStream());
 			System.out.println("Outtoclient oprettet!");
 			//Sets client sentence equals input from client
 			//incomingJson = inFromClient.readLine();			
+			byte[] b = new byte[30000];
+			
+			inFromClient.read(b);
 			
 			String ny = cryp.decrypt(b);
+			 
+			CreateCalendar cc = gson.fromJson(ny, CreateCalendar.class);
+			
+			System.out.println(cc.getCalendarName());
 			
 			//cryp.StringEncryption(inFromClient.readLine());
 			System.out.println("Besked modtaget!");

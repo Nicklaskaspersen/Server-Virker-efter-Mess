@@ -120,7 +120,7 @@ public class QueryBuilder {
             if(i != (fields.length-1)) {
                 setQuery += fields[i] + "='" + values[i] + "',";
             } else {
-                setQuery += fields[i] + "='" + values[i] + "'";
+                setQuery += fields[i] + "='" + values[i] + "',";
             }
         }
         queryBuilder.setFields(setQuery);
