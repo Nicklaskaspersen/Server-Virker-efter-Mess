@@ -86,7 +86,7 @@ public class openAdmin implements Runnable{
 		label.setLocation(0, 0);
 		panel.add(label);
 		label.setIcon(new ImageIcon(openAdmin.class.getResource("/Images/MetalBackground.jpg")));
-		label.setSize(new Dimension(250, 100));
+		label.setSize(new Dimension(233, 81));
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 	}
 	@Override

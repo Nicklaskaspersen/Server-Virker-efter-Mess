@@ -37,9 +37,9 @@ public class ClientWorker implements  Runnable{
 			
 			String ny = cryp.decrypt(b);
 			 
-			CreateCalendar cc = gson.fromJson(ny, CreateCalendar.class);
+//			CreateCalendar cc = gson.fromJson(ny, CreateCalendar.class);
 			
-			System.out.println(cc.getCalendarName());
+//			System.out.println(cc.getCalendarName());
 			
 			//cryp.StringEncryption(inFromClient.readLine());
 			System.out.println("Besked modtaget!");

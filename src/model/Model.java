@@ -12,6 +12,7 @@ import java.sql.*;
 public abstract class Model {
 
     private static Configurations cf = new Configurations();
+    
 
     private static String sqlUrl = "jdbc:mysql://localhost:3306";
     private static String sqlUser = "root";
