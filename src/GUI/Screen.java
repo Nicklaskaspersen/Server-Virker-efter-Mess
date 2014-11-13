@@ -24,7 +24,7 @@ public class Screen extends JFrame {
 	private final MainMenu mainMenu = new MainMenu();
 	private final UserInfo userInfo = new UserInfo();
 	private final NoteList noteList = new NoteList();
-//	private final UserList userlist = new UserList();
+	private final UserList userlist = new UserList();
 	CardLayout c;
 	private final EventList eventList = new EventList();
 	private AddEventGUI addEventGUI;
@@ -74,7 +74,7 @@ public class Screen extends JFrame {
 		
 		contentPane.add(eventList, "name_534038022095149");
 		
-//		contentPane.add(userlist, "name_280161954000083");
+		contentPane.add(userlist, "name_280161954000083");
 		c = (CardLayout) getContentPane().getLayout();
 	}
 	
@@ -92,9 +92,9 @@ public class Screen extends JFrame {
 	public NoteList getNoteList() {
 		return noteList;
 	}
-//	public UserList getUserList() {
-//		return userlist;
-//	}
+	public UserList getUserList() {
+		return userlist;
+	}
 	public void show(String card) {
 		c.show(getContentPane(),  card);
 	}

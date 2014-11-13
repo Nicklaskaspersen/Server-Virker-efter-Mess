@@ -47,29 +47,32 @@ public class UserList extends JPanel {
  
 
 
-        	Object[][] data = {
+        	Object[][] data = new Object[50][50];
         		
-        };
-        
+        	
+        		
+        		try {
+        				QueryBuilder qb = new QueryBuilder();
+        				rs = qb.selectFrom("users").all().ExecuteQuery();
+        				
+        				
+        		        int count = 0;
+        		        while (rs.next()) {
+        		        	data[count][0] = rs.getString("userid");
+        		        	data[count][1] = rs.getString("email");
+        		        	data[count][2] = rs.getString("active");
+        		        	data[count][3] = rs.getString("created");
+        		        	data[count][4] = rs.getString("password");
+
+        		        	count++;
+        		        }
+        			} catch (SQLException e1) {
+        				e1.printStackTrace();
+        			}	
+      
 	
     
-        try {
-			QueryBuilder qb = new QueryBuilder();
-			rs = qb.selectFrom("users").all().ExecuteQuery();
-			
-	        int count = 0;
-	        while (rs.next()) {
-	        	data[count][0] = rs.getString("userid");
-	        	data[count][1] = rs.getString("email");
-	        	data[count][2] = rs.getString("active");
-	        	data[count][3] = rs.getString("created datetime");
-	        	data[count][4] = rs.getString("password");
-
-	        	count++;
-	        }
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}
+        
 
  
         final JTable table = new JTable(data, columnNames);
@@ -169,7 +172,12 @@ public class UserList extends JPanel {
         add(lblBackground);
     }
  
-    private void printDebugData(JTable table) {
+    private void fillData() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void printDebugData(JTable table) {
         int numRows = table.getRowCount();
         int numCols = table.getColumnCount();
         javax.swing.table.TableModel model = table.getModel();

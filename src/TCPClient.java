@@ -4,6 +4,8 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.Scanner;
 
+import model.user.encryptionAES;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -14,14 +16,17 @@ public class TCPClient {
 		String modifiedSentence;
 		Gson gson = new GsonBuilder().create();
 		CreateCalendar CC = new CreateCalendar();
+		encryptionAES aes = new encryptionAES();
+		AuthUser authUser = new AuthUser();
 		Scanner userInput = new Scanner(System.in);
-		System.out.println("indtast hvad din kalender skal hedde");
-		String kalenderNavn = userInput.nextLine();
-		CC.setCalendarName(kalenderNavn);
-		CC.setPublicOrPrivate(1);
-		CC.setUserName("John");
-		String gsonString = gson.toJson(CC);
-		System.out.println(CC);
+		System.out.println("Indtast dit brugernavn/email");
+		String brugernavn = userInput.nextLine();
+		authUser.setAuthUserEmail(brugernavn);
+		System.out.println("Indtast dit password");
+		String password = aes.encrypt(userInput.nextLine());
+		authUser.setAuthUserPassword(password);
+		String gsonString = gson.toJson(authUser);
+		System.out.println(authUser);
 		System.out.println(gsonString);
 
 		Socket clientSocket = new Socket("localhost", 8888);
