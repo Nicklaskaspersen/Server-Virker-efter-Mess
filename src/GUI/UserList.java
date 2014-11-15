@@ -47,7 +47,7 @@ public class UserList extends JPanel {
  
 
 
-        	Object[][] data = new Object[50][50];
+        	Object[][] data = new Object[200][200];
         		
         	
         		
